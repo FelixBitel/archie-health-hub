@@ -1,0 +1,29 @@
+﻿CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS pets (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  species VARCHAR(100),
+  breed VARCHAR(100),
+  age INTEGER,
+  weight DECIMAL(5,2),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS health_records (
+  id SERIAL PRIMARY KEY,
+  pet_id INTEGER NOT NULL,
+  record_date DATE,
+  temperature DECIMAL(5,2),
+  weight DECIMAL(5,2),
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (pet_id) REFERENCES pets(id)
+);

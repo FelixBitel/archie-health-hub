@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archie Health Hub - Pet Health Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .feature {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .cta-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 30px;
+        }
+        .cta-button:hover {
+            background: #764ba2;
+        }
+        .status {
+            margin-top: 40px;
+            padding: 20px;
+            background: #e7f3ff;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐕 Archie Health Hub</h1>
+        <p class="subtitle">Production-Ready Pet Health Management Application</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🏥</div>
+                <h3>Health Tracking</h3>
+                <p>Monitor weight, activity, medications</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📝</div>
+                <h3>Task Management</h3>
+                <p>Feeding, walks, vet appointments</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Assistant</h3>
+                <p>Health recommendations & insights</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Analytics</h3>
+                <p>Comprehensive health reports</p>
+            </div>
+        </div>
+
+        <button class="cta-button" onclick="window.location.href='https://github.com/FelixBitel/archie-health-hub'">
+            View on GitHub
+        </button>
+
+        <div class="status">
+            <h3>✅ Backend Status</h3>
+            <p><strong>API Routes:</strong> pet, health, tasks, ai</p>
+            <p><strong>Database:</strong> PostgreSQL with connection pool</p>
+            <p><strong>Authentication:</strong> JWT + bcryptjs</p>
+            <p><strong>Tech Stack:</strong> Node.js 18+, Express.js 4.18+, TypeScript 5.2+</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,14 +11,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use('/api/auth', authRoutes);
 
-// Health check
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({ status: 'Backend is running' });
 });
 
 app.listen(PORT, () => {
-  console.log(\Server running on port \\);
+  console.log(`Server running on port ${PORT}`);
 });

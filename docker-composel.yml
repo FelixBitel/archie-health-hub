@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: archie-db
+    environment:
+      POSTGRES_USER: archie
+      POSTGRES_PASSWORD: archie_password
+      POSTGRES_DB: archie_health
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U archie"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - archie-network
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: archie-backend
+    environment:
+      DATABASE_URL: postgresql://archie:archie_password@db:5432/archie_health
+      JWT_SECRET: ${JWT_SECRET:-super-secret-key-change-in-production}
+      PORT: 5000
+      NODE_ENV: ${NODE_ENV:-development}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - archie-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: archie-frontend
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - archie-network
+    restart: unless-stopped
+
+networks:
+  archie-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

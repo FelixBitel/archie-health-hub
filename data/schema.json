@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "date": {"type": "string", "format": "date-time"},
+          "weight": {"type": "number", "minimum": 0},
+          "height": {"type": "number", "minimum": 0},
+          "activity": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["id", "date"]
+      }
+    },
+    "schema_version": {"type": "string"}
+  }
+}

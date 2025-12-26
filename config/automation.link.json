@@ -1,0 +1,12 @@
+﻿{
+  "automation_project": "../archie-automation",
+  "scripts": {
+    "backup": "../archie-automation/scripts/backup.ps1",
+    "deploy": "../archie-automation/scripts/deploy.ps1"
+  },
+  "directories": {
+    "backups": "../archie-automation/backups",
+    "logs": "../archie-automation/logs",
+    "data": "../archie-automation/data"
+  }
+}

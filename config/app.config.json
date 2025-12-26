@@ -1,0 +1,18 @@
+﻿{
+  "app": {
+    "name": "Archie Health Dashboard",
+    "version": "2.0.0",
+    "author": "Felix Bitel"
+  },
+  "ai": {
+    "endpoint": "http://localhost:1337/v1/chat/completions",
+    "model": "qwen3-8b-instruct",
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "system_prompt": "Ты — ветеринарный AI-ассистент для питомца Archie. Даёшь краткие советы по здоровью на русском языке."
+  },
+  "storage": {
+    "type": "localStorage",
+    "prefix": "archie_health_"
+  }
+}

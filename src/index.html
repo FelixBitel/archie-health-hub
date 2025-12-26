@@ -1,0 +1,83 @@
+﻿const API_URL = 'http://localhost:1337/v1/chat/completions';
+
+export async function askAI(message) {
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: 'qwen3-8b-instruct',
+            messages: [
+                {
+                    role: 'system',
+                    content: 'Ты — ветеринарный AI-ассистент для питомца Archie. Даёшь краткие советы по здоровью на русском языке.'
+                },
+                { role: 'user', content: message }
+            ],
+            temperature: 0.7,
+            max_tokens: 500
+        })
+    });
+    
+    if (!response.ok) {
+        throw new Error('AI API error: ' + response.statusText);
+    }
+cd K:\Jan\Projects\archie\src
+
+# index.html
+@'
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archie Health Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 max-w-6xl">
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2">🐾 Archie Health Dashboard</h1>
+            <p class="text-gray-600">AI-powered health monitoring for your pet</p>
+        </header>
+        
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Health Stats -->
+            <section class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-semibold mb-4">📊 Health Stats</h2>
+                <div id="health-stats">
+                    <p class="text-gray-500">No data yet. Add your first entry!</p>
+                </div>
+                <button id="add-entry-btn" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Add Entry
+                </button>
+            </section>
+            
+            <!-- AI Assistant -->
+            <section class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-2xl font-semibold mb-4">🤖 AI Assistant</h2>
+                <div id="ai-chat" class="h-64 overflow-y-auto mb-4 border p-3 rounded bg-gray-50">
+                    <p class="text-gray-500">Ask me anything about Archie's health!</p>
+                </div>
+                <div class="flex gap-2">
+                    <input id="ai-input" type="text" placeholder="Ask AI..." 
+                           class="flex-1 border rounded px-3 py-2 focus:outline-blue-500">
+                    <button id="ai-send-btn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Send
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Activity Log -->
+            <section class="bg-white p-6 rounded-lg shadow md:col-span-2">
+                <h2 class="text-2xl font-semibold mb-4">📅 Activity Log</h2>
+                <div id="activity-log">
+                    <p class="text-gray-500">No activities recorded yet.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
